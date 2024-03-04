@@ -30,20 +30,25 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        SharedPreferences auth = requireContext().getSharedPreferences("auth", Context.MODE_PRIVATE);
-
-
+        String username = binding.etLoginEmail.getText().toString();
+        String password = binding.etLoginPassword.getText().toString();
         binding.btnLogin.setOnClickListener(v -> {
-            String username = binding.etLoginEmail.getText().toString();
-            String password = binding.etLoginPassword.getText().toString();
+            login(username, password);
+        });
+    }
 
-            if (username.equals(auth.getString("username", "")) && password.equals(auth.getString("password", ""))) {
+    private void login(String username, String password) {
+        SharedPreferences auth = requireContext().getSharedPreferences("auth", Context.MODE_PRIVATE);
+        String passwordFromDB = auth.getString(username, "");
+
+        if (passwordFromDB.isEmpty()) {
+            Toast.makeText(requireContext(), "Username Not Found", Toast.LENGTH_SHORT).show();
+        } else {
+            if (password.equals(passwordFromDB)) {
                 Navigation.findNavController(requireView()).navigate(R.id.action_LoginFragment_to_homeFragment);
             } else {
-                Toast.makeText(requireContext(), "Username or password invalid", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "password invalid", Toast.LENGTH_SHORT).show();
             }
-
-        });
-
+        }
     }
 }
