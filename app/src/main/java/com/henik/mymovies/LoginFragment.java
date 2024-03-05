@@ -30,6 +30,10 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        binding.tvLoginSignup.setOnClickListener(view1 -> {
+            Navigation.findNavController(requireView()).navigate(R.id.action_LoginFragment_to_signupFragment);
+        });
+
         String username = binding.etLoginEmail.getText().toString();
         String password = binding.etLoginPassword.getText().toString();
         binding.btnLogin.setOnClickListener(v -> {
