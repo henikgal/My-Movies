@@ -38,5 +38,7 @@ public class SignupFragment extends Fragment {
                 Toast.makeText(requireContext(), "Passwords aren't the same", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
+
 }
