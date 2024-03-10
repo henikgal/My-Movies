@@ -1,4 +1,4 @@
-package com.henik.mymovies.retrofit
+package com.henik.mymovies.recycler
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,8 +11,8 @@ class MovieAdapter(private val moviesList: List<Movie>) :
     class ViewHolder(private val binding: MovieItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(movie: Movie) {
             binding.movieItemTitle.setText(movie.title)
-            binding.movieItemVoteAverage.setText(movie.voteAverage)
-            binding.movieItemVoteCount.setText(movie.voteCount)
+            binding.movieItemVoteAverage.setText("${movie.voteAverage}")
+            binding.movieItemVoteCount.setText("${movie.voteCount}")
             binding.movieItemReleaseDate.setText(movie.releaseDate)
 
         }
