@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.henik.mymovies.databinding.MovieItemBinding
+import com.henik.mymovies.retrofit.IMAGE_PREFIX
+import com.squareup.picasso.Picasso
 
 class MovieAdapter(private val moviesList: List<Movie>) :
     RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
@@ -14,7 +16,7 @@ class MovieAdapter(private val moviesList: List<Movie>) :
             binding.movieItemVoteAverage.setText("${movie.voteAverage}")
             binding.movieItemVoteCount.setText("${movie.voteCount}")
             binding.movieItemReleaseDate.setText(movie.releaseDate)
-
+            Picasso.get().load(IMAGE_PREFIX + movie.posterPath).into(binding.movieItemImage)
         }
     }
 
