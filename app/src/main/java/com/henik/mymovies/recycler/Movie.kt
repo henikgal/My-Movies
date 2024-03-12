@@ -11,6 +11,8 @@ data class Movie(
     @SerializedName("vote_count")
     val voteCount: Double,
     @SerializedName("release_date")
-    val releaseDate : String
+    val releaseDate : String,
+    @SerializedName("id")
+    val movieID : Int
 )
 

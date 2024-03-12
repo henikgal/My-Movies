@@ -1,13 +1,14 @@
 package com.henik.mymovies.recycler
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.henik.mymovies.databinding.MovieItemBinding
 import com.henik.mymovies.retrofit.IMAGE_PREFIX
 import com.squareup.picasso.Picasso
 
-class MovieAdapter(private val moviesList: List<Movie>) :
+class MovieAdapter(private val moviesList: List<Movie>,private val movieCallback : MovieClickedCallback) :
     RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     class ViewHolder(private val binding: MovieItemBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -17,6 +18,7 @@ class MovieAdapter(private val moviesList: List<Movie>) :
             binding.movieItemVoteCount.setText("${movie.voteCount}")
             binding.movieItemReleaseDate.setText(movie.releaseDate)
             Picasso.get().load(IMAGE_PREFIX + movie.posterPath).into(binding.movieItemImage)
+
         }
     }
 
@@ -33,6 +35,13 @@ class MovieAdapter(private val moviesList: List<Movie>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.onBind(moviesList[position])
+        holder.itemView.setOnClickListener(View.OnClickListener {
+            movieCallback.onMovieClicked(moviesList[position].movieID)
+        })
     }
 
+}
+
+interface MovieClickedCallback{
+    fun onMovieClicked(movieID : Int)
 }
